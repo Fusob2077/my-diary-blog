@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# my-diary
 
-## Getting Started
+个人数字档案馆 / 日记站源码。**高度客制化**，按我自己的栏目、视觉与工作流写的，不是通用博客模板。
 
-First, run the development server:
+> 定位：**personal site reference / showcase**  
+> 适合：看结构、抄某块实现、当学习样本  
+> 不适合：期望 clone 后一键变成「你的博客」
+
+导航里的梦日记、哲学、ACG、嵌入式、法文装饰文案等，都是个人需求，fork 后大概率要大改。
+
+## 技术栈
+
+- Next.js（App Router）+ React + TypeScript + Tailwind CSS
+- Supabase（Postgres + Auth + RLS）
+- 部分动效：Framer Motion / anime.js / tsparticles
+
+## 本地运行
+
+1. 准备一个 [Supabase](https://supabase.com) 项目  
+2. 按 [`supabase/README.md`](./supabase/README.md) 执行 SQL（先 `00-core-tables.sql`，再其余 schema / 可选 seed）  
+3. 在 Supabase Auth 创建管理员邮箱账号  
+4. 配置环境变量：
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cp .env.example .env.local
+# 填入 NEXT_PUBLIC_SUPABASE_URL / NEXT_PUBLIC_SUPABASE_ANON_KEY
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. 安装并启动：
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 仓库里有什么 / 没有什么
 
-## Learn More
+| 有 | 没有 |
+|---|---|
+| 页面与交互代码 | 真实日记、私密正文（在你自己的 DB 里） |
+| Schema SQL + 可选分类 seed | `.env` / 密钥 |
+| 部署说明 | 通用主题/插件系统 |
 
-To learn more about Next.js, take a look at the following resources:
+## 文档
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Schema 说明](./supabase/README.md)
+- [部署说明](./docs/DEPLOY.md)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 开源方式
 
-## Deploy on Vercel
+MIT。可以随意 fork、改、用于自己的项目。  
+若发基于本仓库的衍生项目，欢迎在 README 里提一句参考来源，非强制。
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**安全提醒：** 切勿把 `.env`、service role key、或含隐私的 dump 推进公开仓库。Anon key 也应只用你自己项目的；若曾把密钥写进测试脚本，请在 Supabase 控制台轮换。
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+
+[MIT](./LICENSE)

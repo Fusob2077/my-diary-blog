@@ -24,14 +24,21 @@
 .DS_Store
 *.pem
 
+# 本机上传的 Art 图片（存服务器，不提交）
+/public/uploads
+
+# 版权音频 / 本机杂项，不随仓库分发
+/public/*.mp3
+
 # debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
+# env files（保留示例）
 .env*
+!.env.example
 
 # vercel
 .vercel
@@ -39,3 +46,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# IDE / local Python junk
+.idea/
+.venv/
+**/__pycache__/
